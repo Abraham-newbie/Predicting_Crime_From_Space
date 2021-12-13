@@ -8,7 +8,10 @@ dependencies:
 - seaborn
 - scipy
 - statsmodels
+- jmcmurray os
+- calplot
 - pip
 - pip:
+  - calplot
 
 
