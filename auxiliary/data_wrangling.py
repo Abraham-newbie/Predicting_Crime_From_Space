@@ -5,6 +5,9 @@
 import pandas as pd
 import numpy as np
 import difflib 
+# Catch and ignore the warnings
+import warnings
+warnings.filterwarnings("ignore")
 
 
 
@@ -126,6 +129,7 @@ def matching_names(df1, df2, c1, c2):
     matched_names_df = matched_names_df[~matched_names_df["old_NAME"].isin(["NORTHWEST INDUSTRIAL", "BUCKMAN WEST"])]
     matched_names_dict = dict(zip(matched_names_df["old_NAME"], matched_names_df["matched_names"]))
     df1["Matched_Names"] = df1[c1].map(matched_names_dict)
+    warnings.warn("A value is trying to be set on a copy of a slice from a DataFrame.")
     
     
     
@@ -153,6 +157,7 @@ def merge(df_index, df_matched, type = "night"):
     #df_index.rename(columns = {"Names of Places": "Matched_Names"}, inplace = True)
     df_index['OccurMonth_Year']  = pd.to_datetime(df_index['dates']).dt.to_period('M')
     df_matched['day_or_night'] = np.where(((df_matched['OccurTime']<700) | (df_matched['OccurTime']>2000)), 'night', 'day')
+    warnings.warn("A value is trying to be set on a copy of a slice from a DataFrame.")
     if type == "night":
         df_matched=df_matched[df_matched['day_or_night']=='night'] 
         data_to_convert=df_matched

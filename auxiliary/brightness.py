@@ -1,9 +1,10 @@
 # All the neccessary Python packages
-### Import numpy and pandas, geopandas
+### Import numpy and pandas, geopandas, and os
 import numpy as np
 import pandas as pd
 import geopandas
 import fiona
+import os
 ### Import geemap, and ee:
 import geemap, ee
 ### Initialize ee
@@ -156,11 +157,11 @@ def brightness(date_from, date_to, buffer_df, buffer_dist, band = "avg_rad", aoi
         for i in areas_list:
             area = geemap.shp_to_ee(i)
             features.append(ee.Feature(area.geometry(),
-                                      {'name': i.split("\Shapefiles\\", 1)[1][:-4]}))
+                                      {'name': i.split("Shapefiles\\", 1)[1][:-4]}))
         # Areas Names
         areas_names = []
         for i in areas_list:
-            name = i.split("\Shapefiles\\", 1)[1][:-4]
+            name = i.split("Shapefiles\\", 1)[1][:-4]
             areas_names.append(name)
     elif aoi_type == "buffer-zone":
         
@@ -218,3 +219,13 @@ def brightness(date_from, date_to, buffer_df, buffer_dist, band = "avg_rad", aoi
     
     return df
     
+    
+    
+    
+    
+# Identifying the crs of the shapefile
+def identify_crs(pathtomyshapefile):
+    file = fiona.open(pathtomyshapefile)
+    crs = file.crs
+    v = [value for key, value in crs.items()]
+    return v[0]
