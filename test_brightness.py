@@ -12,7 +12,7 @@ except Exception as e:
         ee.Authenticate()
         ee.Initialize()
 
-from brightness import brightness
+from auxiliary.brightness import brightness
 
 
 class TestBrightnessIndexValue(unittest.TestCase):
