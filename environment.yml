@@ -25,9 +25,8 @@ dependencies:
   - calplot
   - openpyxl
   
-- conda
-- conda:
-  - jupyterlab
-  - mamba
+
+  
+  
 
 
