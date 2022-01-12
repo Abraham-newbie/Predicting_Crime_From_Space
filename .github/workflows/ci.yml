@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: goanpeca/setup-miniconda@v1.0.2
+    - uses: conda-incubator/setup-miniconda@v1.0.2
       with:
            activate-environment: space_farers
            environment-file: environment.yml
@@ -19,6 +19,6 @@ jobs:
       shell: bash -l {0}
       run: |
         export PATH="$PATH:/usr/share/miniconda/bin"
-        source .envrc
+        conda activate space_farers
         jupyter nbconvert --execute --ExecutePreprocessor.timeout=120 project_sv.ipynb
 
