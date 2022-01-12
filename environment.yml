@@ -3,14 +3,10 @@ name: space_farers
 dependencies:
 - geopandas
 - fiona
-- folium 
-- os
-- geemap
-- ee
-- sklearn
-- sklearn.ensemble
-- sklearn.model_selection
-- unittest
+#- folium 
+#- os
+#- geemap
+#- ee
 - numpy
 - pandas
 - jupyterlab
@@ -19,9 +15,12 @@ dependencies:
 - scipy
 - statsmodels
 - jmcmurray os
-- calplot
 - pip
 - pip:
+  - sklearn
+  - unittest
+  - sklearn.ensemble
+  - sklearn.model_selection
   - calplot
   - openpyxl
   
