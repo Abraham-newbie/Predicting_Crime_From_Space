@@ -10,20 +10,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: goanpeca/setup-miniconda@v1.0.2
-      
-
-with:
+      with:
            activate-environment: student_project
            environment-file: environment.yml
            python-version: 3.6
            auto-activate-base: false
-    
-
-- name: execute notebooks
+    - name: execute notebooks
       shell: bash -l {0}
       run: |
         export PATH="$PATH:/usr/share/miniconda/bin"
         source .envrc
-        jupyter nbconvert --
+        jupyter nbconvert --execute --ExecutePreprocessor.timeout=120 project_sv.ipynb
 
-execute --ExecutePreprocessor.timeout=120 project_sv.ipynb
