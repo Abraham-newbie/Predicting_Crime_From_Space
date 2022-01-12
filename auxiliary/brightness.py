@@ -97,11 +97,18 @@ def brightness(date_from, date_to, buffer_df, buffer_dist, band = "avg_rad", aoi
 
     viirs = ee.ImageCollection("NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG").filterDate(date_from, date_to).select(band)
     
+    if aoi_type == "buffer-zone":
+        if len(buffer_df["AOI_Names"].unique()) != len(buffer_df):
+            raise ValueError("The names of the places in AOI_Names column are not distinct. "
+                            "The number of distinct place names and the length of the dataframe does not match.")
+ 
+    
     if aoi_type == "shapefile":
         
         aoi_shp = pathtomyshapefile
         data = geopandas.read_file(aoi_shp)
         data.to_csv("shapefile_dataframe_format.csv")
+        
         
         if crs != "EPSG:4326":
             # Change the CRS of our shapefile to EPSG:4326
@@ -115,7 +122,6 @@ def brightness(date_from, date_to, buffer_df, buffer_dist, band = "avg_rad", aoi
          # 1. Group the data by column where AOI is filled in (inside the shapefile dataframe, in pathtomyshapefile)
         grouped = data.groupby(shp_column_name)
         # 2. Import os -module that is useful for parsing filepaths
-        import os
         # 3. Determine output directory
         output_directory = "AOI_DataSets"
         # 4. Create a new folder called 'Shapefiles'
@@ -216,10 +222,14 @@ def brightness(date_from, date_to, buffer_df, buffer_dist, band = "avg_rad", aoi
     df['mean'] = df['mean'].astype(float)
     df.columns = ["Names of Places", "Average Radiance Per Pixel Per month"]
     df.reset_index(inplace = True)
+ 
     
     return df
     
-    
+
+
+
+
     
     
     
