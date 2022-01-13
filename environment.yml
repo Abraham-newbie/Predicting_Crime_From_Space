@@ -1,8 +1,8 @@
 name: space_farers
 
 dependencies:
-- geopandas
-- fiona
+#- geopandas
+#- fiona
 #- folium 
 #- os
 #- geemap
@@ -16,10 +16,8 @@ dependencies:
 - statsmodels
 - pip
 - pip:
-  - sklearn
-  - unittest
-  - sklearn.ensemble
-  - sklearn.model_selection
+  - scikit-learn
+  #- unittest
   - calplot
   - openpyxl
   
