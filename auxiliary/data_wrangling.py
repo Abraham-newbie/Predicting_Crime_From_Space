@@ -156,6 +156,7 @@ def merge(df_index, df_matched, type = "night"):
     
     #df_index.rename(columns = {"Names of Places": "Matched_Names"}, inplace = True)
     df_index['OccurMonth_Year']  = pd.to_datetime(df_index['dates']).dt.to_period('M')
+    df_index['OccurMonth_Year'] = df_index['OccurMonth_Year'].astype('str')
     df_matched['day_or_night'] = np.where(((df_matched['OccurTime']<700) | (df_matched['OccurTime']>2000)), 'night', 'day')
     warnings.warn("A value is trying to be set on a copy of a slice from a DataFrame.")
     if type == "night":
