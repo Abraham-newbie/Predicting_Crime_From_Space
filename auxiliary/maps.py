@@ -24,7 +24,7 @@ def choropleth_by_pop(df_pop, df_shapefile, by = "interactive"):
     # Merge Shapefile of Neighborhoods with crime dataset - Year 2015 is provided, but the population is same across years
     # as the controls used are only provided for the same one year, so here the purpose is not which year but rather
     # how dense is the population across the communities.
-    population_2015 = df_pop[df_pop["Year"] == "2015"].groupby(["Matched_Names", "Year"])["adj_popn"].mean().reset_index()
+    population_2015 = df_pop[df_pop["Year"] == "2015"].groupby(["Matched_Names", "Year"])['adj_popn_pe_sq_mi'].mean().reset_index()
 
     shp_merged_with_crime_data = pd.merge(
                                             left=population_2015,
@@ -41,33 +41,33 @@ def choropleth_by_pop(df_pop, df_shapefile, by = "interactive"):
         folium.TileLayer('CartoDB positron',name="Light Map",control=False).add_to(geo_map)
 
         #scale = (geo_df['adj_popn'].quantile((0,0.1,0.75,0.9,0.98,1))).tolist()
-        scale = np.linspace(geo_df['adj_popn'].min(), geo_df['adj_popn'].max(), 6, dtype=int).tolist()
+        scale = np.linspace(geo_df['adj_popn_pe_sq_mi'].min(), geo_df['adj_popn_pe_sq_mi'].max(), 6, dtype=int).tolist()
         scale[-1] = scale[-1] + 1
 
         geo_map.choropleth(
          geo_data=geo_df,
          name='Choropleth',
          data=geo_df,
-         columns=['Matched_Names', 'adj_popn'],
+         columns=['Matched_Names', 'adj_popn_pe_sq_mi'],
          key_on="feature.properties.Matched_Names",
          fill_color='BuPu',
          bins=scale,
          fill_opacity=1,
          line_opacity=0.2,
-         legend_name='Population in Portalnd by Neighborhood (quantile scale)',
+         legend_name='Population Density in Portland by Neighborhood (quantile scale)',
          smooth_factor=0
         )
 
-        geo_map.save(os.path.join('./Figures', 'population_interactive.html'))
+        geo_map.save(os.path.join('./Figures', 'pop_density_interactive.html'))
 
         return geo_map
     elif by == "static":
         # Create the Choropleth Map of Population across Neighborhoods in Portland using Matplotlib
         fig, ax = plt.subplots(figsize=(11, 7))
-        geo_df.plot(column='adj_popn', cmap='Reds',  linewidth=1, ax=ax, edgecolor='0.9', legend=True)
+        geo_df.plot(column='adj_popn_pe_sq_mi', cmap='Reds',  linewidth=1, ax=ax, edgecolor='0.9', legend=True)
         ax.axis('off')
-        plt.title("Population of Neighborhoods in Portland")
-        plt.savefig('Figures/Population_static.png', bbox_inches='tight')
+        plt.title("Population Density of Neighborhoods in Portland")
+        plt.savefig('Figures/pop_density_static.png', bbox_inches='tight')
         plt.show()
     else:
         raise NameError(f"{by} is not defined. Try using either of the 'interactive' or 'static' options for the plot")
@@ -76,7 +76,7 @@ def choropleth_by_pop(df_pop, df_shapefile, by = "interactive"):
         
         
         
-def choropleth_by_year(merged_df, shapefile, year = "2015", by = "interactive", type = "yearly"):
+def choropleth_by_crime(merged_df, shapefile, year = "2015", by = "interactive", type = "yearly"):
     """ Returns the interactive or static plot of the offernse rate spread across neighborhoods in Portland
     Args:
         merged_df       (dataframe): The dataframe that includes offenses information
@@ -238,7 +238,7 @@ def choropleth_by_brightness(df, shapefile, year = "2015", by = "static"):
          legend_name=f'Annual Average of average Radiance in {year}',
          smooth_factor=0
         )
-        geo_map.save(os.path.join('./Figures', f'annual_average_brightness_in_portland_by_neighborhoods_{year}.html'))
+        geo_map.save(os.path.join('./Figures', f'Brightness_interactive{year}.html'))
         return geo_map
     
     elif by == "static":

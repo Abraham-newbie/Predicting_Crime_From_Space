@@ -198,7 +198,7 @@ def brightness(date_from, date_to, buffer_df, buffer_dist, band = "avg_rad", aoi
     cities_list = reduced_cities.reduceColumns(ee.Reducer.toList(len(key_cols)), key_cols).values()
     dates_list = dates.reduceColumns(ee.Reducer.toList(1), ['date']).values()
 
-    # some numpy maneuvers to structure our data
+    # structuring our data
     if np.asarray(cities_list.getInfo()).squeeze().shape == (2,):
         df = pd.DataFrame(np.asarray(cities_list.getInfo()).squeeze()).T
         df.columns = key_cols
@@ -214,11 +214,11 @@ def brightness(date_from, date_to, buffer_df, buffer_dist, band = "avg_rad", aoi
         for c in buffer_df["AOI_Names"]:
             df.loc[df['name']==c,'dates'] = dates
 
-    # as we've done before, convert date and set index
+    # converting date as datetime datatype and setting the index
     df['dates'] = pd.to_datetime(df['dates'])
     df.set_index('dates', inplace=True)
 
-    # we'll also convert our mean datatype to float
+    # converting our mean datatype to float
     df['mean'] = df['mean'].astype(float)
     df.columns = ["Names of Places", "Average Radiance Per Pixel Per month"]
     df.reset_index(inplace = True)
@@ -239,3 +239,29 @@ def identify_crs(pathtomyshapefile):
     crs = file.crs
     v = [value for key, value in crs.items()]
     return v[0]
+
+
+def ganja_brightness(date_from, date_to, ganja_lat, ganja_lon, buffer_distance):
+    ganja = []
+    import datetime as dt
+    first_day_of_month= pd.date_range(date_from, date_to, freq='1M') - pd.offsets.MonthBegin(1)
+    last_day_of_month= pd.date_range(date_from, date_to, freq='1M')
+    df_date_first_days = pd.DataFrame(data = first_day_of_month, columns = ["first_day_dates"])
+    df_date_last_days = pd.DataFrame(data = last_day_of_month, columns = ["last_day_dates"])
+    f = df_date_first_days["first_day_dates"].dt.date
+    l = df_date_last_days["last_day_dates"].dt.date
+    for first, last in zip(f, l):
+        viirs2020_10 = ee.ImageCollection("NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG").filterDate(str(first),
+                                                                                      str(last)).select('avg_rad').median()
+        lat = ganja_lat
+        lon = ganja_lon
+        aoi_ganja = ee.Geometry.Point([lon, lat]).buffer(buffer_distance)
+        viirs2020_10_clipped = viirs2020_10.clip(aoi_ganja)
+        mean_ganja = viirs2020_10_clipped.reduceRegion(reducer=ee.Reducer.mean(), scale = 500)
+        mean_ganja = ee.Number(mean_ganja.get('avg_rad')).getInfo()
+        ganja.append(mean_ganja)
+    ganja_df = pd.DataFrame(data = ganja, columns = ["ganja_brightness"]                                                                     
+    return ganja_df                                                                                    
+                                                                                           
+
+                                                                                           

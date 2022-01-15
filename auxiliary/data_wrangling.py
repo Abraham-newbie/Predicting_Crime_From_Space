@@ -200,7 +200,7 @@ def add_controls(df_merged):
     """
     
     
-    xl = pd.ExcelFile('data/neighborhood_controls.xlsx',  engine ="openpyxl")
+    xl = pd.ExcelFile('data/neighborhood_controls.xlsx')
     controls = xl.parse('Sheet1')
     controls=controls.replace({'Neighborhood': {'ARDENWALD-JOHNSON CREEK': 'ARDENWALD',
                                             'BRENTWOOD/ DARLINGTON': 'BRENTWOOD-DARLINGTON',
