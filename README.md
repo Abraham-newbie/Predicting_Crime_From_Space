@@ -59,12 +59,12 @@ The section on Random Forest Regression explores the predictive power of brightn
        src="https://mybinder.org/badge_logo.svg"
        width="109" height="20">
 </a>
----
-
-
 
 
 ![Continuous Integration](https://github.com/OpenSourceEconomics/ose-scientific-computing-course-space_farers/workflows/Continuous%20Integration/badge.svg)
+
+---
+
 
 
 
