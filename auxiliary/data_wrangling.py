@@ -178,13 +178,26 @@ def merge(df_index, df_matched, type = "night"):
     df_wide = df_wide.replace(np.nan, 0)
     df_wide['Total_Offenses']= df_wide.iloc[:,4:].sum(axis=1)
     df_wide=df_wide.reset_index()
+    df_wide["OccurMonth_Year"] = df_wide["OccurMonth_Year"].astype(str)
+    df_index["OccurMonth_Year"] = df_index["OccurMonth_Year"].astype(str)
     match_df = pd.merge(
-    left=df_wide,
-    right=df_index,
-    left_on = ['Matched_Names','OccurMonth_Year'], 
-    right_on = ['Names of Places', 'OccurMonth_Year'],
-    how='left'
-     )
+            left=df_wide,
+            right=df_index.rename(columns = {"Names of Places": "Matched_Names"}).drop(columns = ["Unnamed: 0",
+                                                                                                          "dates"]),
+            on = ['Matched_Names','OccurMonth_Year'], 
+            how='left'
+    )
+    #match_df = pd.merge(
+    #left=df_wide,
+    #right=df_index,
+    #left_on = ['Matched_Names','OccurMonth_Year'], 
+    #right_on = ['Names of Places', 'OccurMonth_Year'],
+   # how='left'
+    # )
+    #merged = pd.concat([df_index.rename(columns = {"Names of Places": "Matched_Names"}), 
+                   # df_wide], axis=1, join="inner")
+    #merged = merged.loc[:,~merged.columns.duplicated()]
+    #merged.drop(merged.columns[2], axis=1, inplace=True)
     
     return match_df
 
@@ -200,8 +213,10 @@ def add_controls(df_merged):
         df_with_controls (dataframe): crime dataset with controls
     """
     
+    xl = pd.ExcelFile('data/neighborhood_controls.xlsx')
+    #xl = pd.ExcelFile('data/neighborhood_controls.xlsx', engine = 'openpyxl')
     
-    xl = pd.ExcelFile('data/neighborhood_controls.xlsx', engine = 'openpyxl')
+    
     controls = xl.parse('Sheet1')
     controls=controls.replace({'Neighborhood': {'ARDENWALD-JOHNSON CREEK': 'ARDENWALD',
                                             'BRENTWOOD/ DARLINGTON': 'BRENTWOOD-DARLINGTON',
@@ -219,6 +234,7 @@ def add_controls(df_merged):
                                         on='Neighborhood',
                                         how='left'
                                          )
+    
     
     return df_with_controls
 
