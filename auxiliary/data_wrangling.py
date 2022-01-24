@@ -213,8 +213,8 @@ def add_controls(df_merged):
         df_with_controls (dataframe): crime dataset with controls
     """
     
-    xl = pd.ExcelFile('data/neighborhood_controls.xlsx')
-    #xl = pd.ExcelFile('data/neighborhood_controls.xlsx', engine = 'openpyxl')
+    #xl = pd.ExcelFile('data/neighborhood_controls.xlsx')
+    xl = pd.ExcelFile('data/neighborhood_controls.xlsx', engine = 'openpyxl')
     
     
     controls = xl.parse('Sheet1')
