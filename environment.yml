@@ -12,14 +12,26 @@ dependencies:
 - jupyterlab
 - matplotlib
 - seaborn
-- scipy
-- statsmodels
+#- scipy
+#- statsmodels
+#- os
+#- datetime
+#- openpyxl
+#- statsmodels
+#- geopandas
+#- sklearn
+- shapely
+#- folium
+#- pmdarima
+- pydot
+
 - pip
 - pip:
   - scikit-learn
   #- unittest
   - calplot
   - openpyxl
+  #- sklearn
   
 
   
