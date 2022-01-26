@@ -1,37 +1,37 @@
 name: space_farers
-
+channels:
+  - conda-forge
+  - defaults
 dependencies:
+- python=3.8
 #- geopandas
 #- fiona
-#- folium 
-#- os
 #- geemap
 #- ee
 - numpy
 - pandas
 - jupyterlab
 - matplotlib
-- seaborn
-#- scipy
-#- statsmodels
+- seaborn 
+- scipy
+- statsmodels
 #- os
 #- datetime
-#- openpyxl
-#- statsmodels
 #- geopandas
-#- sklearn
 - shapely
-#- folium
-#- pmdarima
+- folium
+- pmdarima
 - pydot
+- conda-forge::geopandas
 
-- pip
-- pip:
-  - scikit-learn
+- pip  
+- pip:  
+  - scikit-learn 
   #- unittest
   - calplot
   - openpyxl
   #- sklearn
+  #- geopandas
   
 
   
