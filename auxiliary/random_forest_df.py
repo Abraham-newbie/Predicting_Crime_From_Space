@@ -58,3 +58,20 @@ def total_offenses(df, list_col):
     
     return df_rf_total
 
+def train_test_split(encoded_df, label):
+    train_features = np.array(encoded_df[encoded_df["Year"].isin([2015,
+                                                                    2016,
+                                                                    2017,
+                                                                    2018, 
+                                                                    2019])].drop(label,
+                                                                                 axis = 1))
+
+    train_label = np.array(encoded_df.loc[encoded_df["Year"].isin([2015,
+                                                                         2016,
+                                                                         2017,
+                                                                         2018,
+                                                                         2019]), label])
+    test_features = np.array(encoded_df[encoded_df["Year"] == 2020].drop(label, axis = 1))
+    test_label = np.array(encoded_df.loc[encoded_df["Year"] == 2020, label])
+
+    return train_features, train_label, test_features, test_label
