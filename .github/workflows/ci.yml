@@ -13,12 +13,12 @@ jobs:
       with:
            activate-environment: space_farers
            environment-file: environment.yml
-           python-version: 3.6
+           python-version: 3.8
            auto-activate-base: false
     - name: execute notebooks
       shell: bash -l {0}
       run: |
         export PATH="$PATH:/usr/share/miniconda/bin"
         conda activate space_farers
-        jupyter nbconvert --to html --execute --ExecutePreprocessor.timeout=5000 project_sv_environment.ipynb
+        jupyter nbconvert --to html --execute --ExecutePreprocessor.timeout=5000 project_ar-Copy1.ipynb
 
