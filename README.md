@@ -6,7 +6,7 @@
 # Prediction of Crime Rates using Brightness derived from Nighttime Satellite Light Images - VIIRS
 
 ---
-OSE Scientific Computing | Winter 2021, M.Sc. in Economics, University of Bonn | [Sona Verdiyeva](https://github.com/s6soverd)() and [Abraham Raju](https://github.com/Abraham-newbie)(3296612)
+OSE Scientific Computing | Winter 2021/22 | [Sona Verdiyeva](https://github.com/s6soverd)() and [Abraham Raju](https://github.com/Abraham-newbie) (3296612)
 
 ---
 
