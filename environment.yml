@@ -25,6 +25,8 @@ dependencies:
 - pydot
 - conda-forge::geopandas
 - conda-forge::geemap
+- conda-forge::earthengine-api
+
 #- jmcmurray::os
 
 
