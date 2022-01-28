@@ -25,7 +25,7 @@ dependencies:
 - pydot
 - conda-forge::geopandas
 #- conda-forge::geemap
-- conda-forge::earthengine-api
+#- conda-forge::earthengine-api
 
 #- jmcmurray::os
 
@@ -36,7 +36,7 @@ dependencies:
   #- unittest
   - calplot
   - openpyxl
-  - geemap
+  #- geemap
   #- sklearn
   #- geopandas
   

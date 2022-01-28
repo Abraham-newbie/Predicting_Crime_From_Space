@@ -1,3 +1,8 @@
+[![Continuous Integration](https://github.com/OpenSourceEconomics/ose-scientific-computing-course-space_farers/actions/workflows/ci.yml/badge.svg)](https://github.com/OpenSourceEconomics/ose-data-science-course-project-Abraham-newbie/actions/workflows/ci.yml) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ose-scientific-computing-course-space_farers/master?filepath=project_notebook.ipynb)
+[![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/OpenSourceEconomics/ose-scientific-computing-course-space_farers/blob/master/project_notebook.ipynb)
+
+
+
 # Prediction of Crime Rates using Brightness derived from Nighttime Satellite Light Images - VIIRS
 
 ---
