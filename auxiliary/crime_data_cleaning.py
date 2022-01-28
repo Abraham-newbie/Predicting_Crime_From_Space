@@ -11,12 +11,11 @@ warnings.filterwarnings("ignore")
 
 
 
-
 def clean_data(file):
 
      df = []
      for f in file:
-         csv_file="data"+ "/" + f
+         csv_file="data"+ "/" + "updated_crime_data" + "/" + f
          print(csv_file)
          df.append(pd.read_csv(csv_file))
          df_full = pd.concat(df, ignore_index=True)

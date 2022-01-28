@@ -5,6 +5,7 @@
 import pandas as pd
 import numpy as np
 import difflib 
+import matplotlib.pyplot as plt
 # Catch and ignore the warnings
 import warnings
 warnings.filterwarnings("ignore")
@@ -213,8 +214,8 @@ def add_controls(df_merged):
         df_with_controls (dataframe): crime dataset with controls
     """
     
-    #xl = pd.ExcelFile('data/neighborhood_controls.xlsx')
-    xl = pd.ExcelFile('data/neighborhood_controls.xlsx', engine = 'openpyxl')
+    xl = pd.ExcelFile('data/neighborhood_controls.xlsx')
+    #xl = pd.ExcelFile('data/neighborhood_controls.xlsx', engine = 'openpyxl')
     
     
     controls = xl.parse('Sheet1')
@@ -239,5 +240,66 @@ def add_controls(df_merged):
     return df_with_controls
 
 
+def slice_shapefile(shp_df):
+    # Bringing the names of places in shapefile to the form that is used in crime dataset
+    list_names = []
+    for name in shp_df["NAME"]:
+        n = name.replace(" ", "_").replace("/", "_").replace(".", "").replace(",", "_")
+        list_names.append(n)
 
+    # Creating a column to include the updated Names
+    shp_df["Matched_Names"] = list_names
+
+    # Slicing the shapefile_portland dataframe to only include the Names and Geometry of the areas
+    sliced_shapefile = shp_df[["Matched_Names", "geometry"]].dropna()
+    
+    return sliced_shapefile
+
+
+def bar_plot_population(df):
+    # Create a new column - Year
+    df["Year"] = df.OccurMonth_Year.astype(str).str[:-3]
+    # Group by the dataset by Neighborhood and Year, and average the population for the years 2015 to 2021 by Neighborhood
+    average_adj_pop_by_neighborhood = df.groupby(["Neighborhood", "Year"])['adj_popn_pe_sq_mi'].mean().reset_index()
+
+    # Create the figure
+    fig = plt.figure(figsize = (30, 10))
+    x = average_adj_pop_by_neighborhood[average_adj_pop_by_neighborhood["Year"] == "2015"]["Neighborhood"]
+    y = average_adj_pop_by_neighborhood[average_adj_pop_by_neighborhood["Year"] == "2015"]['adj_popn_pe_sq_mi']
+
+    # creating the bar plot
+    plt.bar(x, y, color ='maroon')
+
+    plt.xlabel("Neighborhood Names", fontsize = "xx-large")
+    plt.ylabel("Population", fontsize = "xx-large")
+    plt.title("Average Adjusted Population per square miles by Neighborhoods in Portland", fontsize = "xx-large")
+    plt.xticks(rotation = 90, fontsize = "xx-large")
+    plt.show()
+    
+    return
+
+
+
+def create_new_df(df_list, df_index):
+    df_concatted = drop_nan_and_uncommon_and_concat(dataframes = df_list)
+
+    # Match and merge with brightness_index - for the Offenses that occurred in the night/ daytime/or both
+    df_matched = matching_names(df1 = df_concatted, 
+                                   df2 = df_index, 
+                                   c1 = "Neighborhood", 
+                                   c2 = "Names of Places")
+    df_merged = merge(df_index = df_index, df_matched = df_matched, type = "night")
+    df_with_controls = add_controls(df_merged = df_merged)
+
+    # Saving also the crime data with controls for daytime and for all daylong occurence
+    df_merged_day = merge(df_index = df_index, df_matched = df_matched, type = "day")
+    df_with_controls_day = add_controls(df_merged = df_merged_day)
+
+    df_merged_all = merge(df_index = df_index, df_matched = df_matched, type = "all")
+    df_with_controls_all = add_controls(df_merged = df_merged_all)
+    
+    return df_with_controls, df_with_controls_day, df_with_controls_all
+
+
+    
 
