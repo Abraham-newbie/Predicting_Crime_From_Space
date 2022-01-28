@@ -5,6 +5,14 @@ import matplotlib.pyplot as plt
 
 
 def day_night_crimes(data):
+ """Compiles a regression table including different controls
+    
+ Args:
+         data: A dataframe with both crime data, controls and brightness information
+    
+ Returns:
+        A histogram plot for day/night crimes
+ """
 
  clean_data_day_night= data.groupby(['OccurTime']).OffenseCount.sum().reset_index()
  clean_data_day_night['OffenseCount']  = (clean_data_day_night['OffenseCount'] /clean_data_day_night['OffenseCount'].sum()) * 100
@@ -61,6 +69,15 @@ def day_night_crimes(data):
 
 
 def day_night_selected_crimes(data):
+    
+ """Compiles a regression table including different controls
+    
+ Args:
+         data: A dataframe with both crime data, controls and brightness information
+    
+ Returns:
+        A histogram plot for day/night crimes for selected crimes only
+ """
     
  clean_data=data
  
@@ -136,6 +153,14 @@ def day_night_selected_crimes(data):
 
 
 def pop_graph(data):
+ """Compiles a regression table including different controls
+    
+ Args:
+      data: A dataframe with both crime data, controls and brightness information
+    
+ Returns:
+       A population histogram for population across portland neighborhoods
+ """
  df_with_controls=data
  # Create a new column - Year
  df_with_controls["Year"] = df_with_controls.OccurMonth_Year.astype(str).str[:-3]

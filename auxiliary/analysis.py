@@ -8,7 +8,14 @@ from statsmodels.iolib.summary2 import summary_col
 
 
 def corona_reg(data):
-
+ """Compiles a regression table including different controls
+    
+  Args:
+         data: A dataframe with both crime data, controls and brightness information
+    
+ Returns:
+       A regression table.
+ """
 
  n_month_crime_with_brightness=data
 
@@ -67,6 +74,15 @@ def corona_reg(data):
 
 
 def crime_reg(data):
+    
+ """Compiles a regression table including different controls for the effect of first lockdown
+    
+ Args:
+         data: A dataframe with both crime data, controls and brightness information
+    
+ Returns:
+        A regression table.
+ """
 
  pd.options.mode.chained_assignment = None 
  n_month_crime_with_brightness=data
@@ -135,6 +151,16 @@ def crime_reg(data):
 
 
 def random_forest_call_service(data):
+    
+    
+ """Runs a randomforest for the call of service data,predicting time to response
+    
+ Args:
+         data: A dataframe with call for service data.
+    
+ Returns:
+        A random forest object
+ """
  merged=data
  merged_rf=merged.dropna()
 
