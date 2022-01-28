@@ -2,7 +2,7 @@ name: space_farers
 channels:
   - conda-forge
   - defaults
-  - jmcmurray
+
 dependencies:
 - python=3.8
 #- geopandas
