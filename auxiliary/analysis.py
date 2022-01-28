@@ -134,3 +134,28 @@ def crime_reg(data):
  return(results)
 
 
+def random_forest_call_service(data):
+ merged=data
+ merged_rf=merged.dropna()
+
+ from sklearn.model_selection import train_test_split
+
+ labels = np.array(merged_rf['ResponseTime_sec'])
+ features= merged_rf[['TravelTime_sec','Priority','FinalCallGroup','Neighborhood']]
+ feature_list = list(features.columns)
+
+ #features['index_right'] = features.index_right.astype('category')
+
+
+ merged_rf=pd.get_dummies(features)
+ features = np.array(merged_rf)
+ train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size = 0.25, random_state = 42)
+ 
+ # Import the model we are using
+ from sklearn.ensemble import RandomForestRegressor 
+ # Instantiate model with 1000 decision trees
+ drf = RandomForestRegressor(n_estimators = 50, random_state = 42)
+ # Train the model on training data
+ drf.fit(train_features, train_labels);
+
+ return drf
