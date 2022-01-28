@@ -24,8 +24,7 @@ dependencies:
 - pmdarima
 - pydot
 - conda-forge::geopandas
-#- conda-forge::mamba
-#- conda-forge::geemap
+- conda-forge::geemap
 #- jmcmurray::os
 
 
