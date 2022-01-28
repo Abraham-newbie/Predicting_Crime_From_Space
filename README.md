@@ -29,7 +29,7 @@ We also extend the project by using Call for Service data provided by the Portla
 
 This project was built using Python. Additional functions required to plot the graphs can be found in the auxiliary folder [here](https://github.com/OpenSourceEconomics/ose-scientific-computing-course-space_farers/tree/master/auxiliary) and plots/graphs which cannot be directly built due to constraints of CI or github (e.g 3-d plots,dynamic plots) can be found in the files folder [here](https://github.com/OpenSourceEconomics/ose-scientific-computing-course-space_farers/tree/master/Figures).
 
-The Portland crime data can be downloaded [here](https://www.portlandoregon.gov/police/71978), and the geo-spatial call for service data can be downloaded[here](https://www.portlandoregon.gov/police/76454).
+The Portland crime data can be downloaded [here](https://www.portlandoregon.gov/police/71978), and the geo-spatial call for service data can be downloaded [here](https://www.portlandoregon.gov/police/76454).
 
 
 
