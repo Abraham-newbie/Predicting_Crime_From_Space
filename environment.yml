@@ -2,6 +2,7 @@ name: space_farers
 channels:
   - conda-forge
   - defaults
+  - jmcmurray
 dependencies:
 - python=3.8
 #- geopandas
@@ -23,6 +24,10 @@ dependencies:
 - pmdarima
 - pydot
 - conda-forge::geopandas
+- conda-forge::mamba
+- conda-forge::geemap
+- jmcmurray::os
+
 
 - pip  
 - pip:  
