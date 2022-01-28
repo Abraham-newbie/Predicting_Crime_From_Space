@@ -6,7 +6,7 @@
 # Prediction of Crime Rates using Brightness derived from Nighttime Satellite Light Images - VIIRS
 
 ---
-OSE Scientific Computing | Winter 2021/22 | [Sona Verdiyeva](https://github.com/s6soverd)() and [Abraham Raju](https://github.com/Abraham-newbie) (3296612)
+OSE Scientific Computing | Winter 2021/22 | [Sona Verdiyeva](https://github.com/s6soverd) and [Abraham Raju](https://github.com/Abraham-newbie)
 
 ---
 
@@ -25,7 +25,7 @@ We also extend the project by using Call for Service data provided by the Portla
 
 ## Additional Notes
 
-The replication is conducted using R. Additional functions required to plot the graphs can be found in the auxiliary folder [here](https://github.com/OpenSourceEconomics/ose-scientific-computing-course-space_farers/tree/master/auxiliary) and plots/graphs which cannot be directly reproduced due to constraints of CI or github (e.g 3-d plots,dynamic plots) can be found in the files folder [here](https://github.com/OpenSourceEconomics/ose-scientific-computing-course-space_farers/tree/master/Figures).
+This project is conducted using Python. Additional functions required to plot the graphs can be found in the auxiliary folder [here](https://github.com/OpenSourceEconomics/ose-scientific-computing-course-space_farers/tree/master/auxiliary) and plots/graphs which cannot be directly built due to constraints of CI or github (e.g 3-d plots,dynamic plots) can be found in the files folder [here](https://github.com/OpenSourceEconomics/ose-scientific-computing-course-space_farers/tree/master/Figures).
 
 The geo-spatial crime data can be downloaded [here](https://www.portlandoregon.gov/police/71978), and the call for service data can be downloaded here. [here](https://www.portlandoregon.gov/police/76454)
 
