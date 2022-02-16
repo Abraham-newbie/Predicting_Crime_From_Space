@@ -10,7 +10,7 @@ OSE Scientific Computing | Winter 2021/22 | [Sona Verdiyeva](https://github.com/
 
 ---
 
-This notebook uses a relatively novel method of crime analysis, by using nighttime-satellite data derived from [VIIRS Nighttime Satellite Light Images](https://developers.google.com/earth-engine/datasets/catalog/NOAA_VIIRS_DNB_MONTHLY_V1_VCMSLCFG) to predict and analyze crime and police response from geo-spatial data provided by the US city of Portland, Oregon.
+This notebook uses a relatively novel method of crime analysis, using nighttime-satellite data derived from [VIIRS Nighttime Satellite Light Images](https://developers.google.com/earth-engine/datasets/catalog/NOAA_VIIRS_DNB_MONTHLY_V1_VCMSLCFG) to predict and analyze crime and police response from geo-spatial data provided by the US city of Portland, Oregon.
 
 
 
